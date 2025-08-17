@@ -5,7 +5,7 @@ const Appointment = require("../models/appointment");
 const { protect } = require("../middleware/auth");
 
 const router = express.Router();
-
+~
 // Doctor generates slots
 router.post("/generate", protect(["doctor"]), async (req, res) => {
   try {
