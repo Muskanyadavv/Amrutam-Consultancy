@@ -172,9 +172,6 @@
 //     </div>
 //   );
 // }
-
-
-
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -193,11 +190,6 @@ export default function DoctorDashboard() {
   const [doctors, setDoctors] = useState<Doctor[]>([]);
   const [searchName, setSearchName] = useState("");
   const [specialtyFilter, setSpecialtyFilter] = useState("");
-  const [newDoctor, setNewDoctor] = useState<Doctor>({
-    name: "",
-    specialty: "",
-    experience: 0,
-  });
 
   // Fetch doctors from backend
   useEffect(() => {
@@ -213,12 +205,7 @@ export default function DoctorDashboard() {
 
         const data: Doctor[] = await res.json();
 
-        if (Array.isArray(data)) {
-          setDoctors(data);
-        } else {
-          console.error("Unexpected API response:", data);
-          setDoctors([]);
-        }
+        setDoctors(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error("Failed to fetch doctors:", err);
         setDoctors([]);
@@ -228,9 +215,9 @@ export default function DoctorDashboard() {
     fetchDoctors();
   }, []);
 
-  // Extract specialties
+  // Extract specialties safely
   const specialties = Array.from(
-    new Set(doctors.map((d) => d.specialty))
+    new Set(doctors.map((d) => d.specialty).filter(Boolean))
   );
 
   // Apply filters
@@ -251,36 +238,6 @@ export default function DoctorDashboard() {
     setSpecialtyFilter("");
   };
 
-  // Add new doctor
-  const addDoctor = async () => {
-    if (!newDoctor.name || !newDoctor.specialty || newDoctor.experience <= 0) {
-      alert("Please fill all fields correctly.");
-      return;
-    }
-
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/doctors`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(newDoctor),
-        }
-      );
-
-      if (!res.ok) {
-        throw new Error("Failed to add doctor");
-      }
-
-      const savedDoctor: Doctor = await res.json();
-
-      setDoctors((prev) => [savedDoctor, ...prev]);
-      setNewDoctor({ name: "", specialty: "", experience: 0 });
-    } catch (err) {
-      console.error("Failed to add doctor:", err);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-[#e1ddb2] py-10 px-6">
       <h1 className="text-3xl text-yellow-900 font-bold text-center mb-8">
@@ -294,13 +251,13 @@ export default function DoctorDashboard() {
           placeholder="Search by name"
           value={searchName}
           onChange={(e) => setSearchName(e.target.value)}
-          className="px-4 py-2 border text-black rounded-lg w-full md:w-64"
+          className="px-4 py-2 border rounded-lg w-full md:w-64"
         />
 
         <select
           value={specialtyFilter}
           onChange={(e) => setSpecialtyFilter(e.target.value)}
-          className="px-4 py-2 border text-black rounded-lg w-full md:w-64"
+          className="px-4 py-2 border rounded-lg w-full md:w-64"
         >
           <option value="">All Specialties</option>
           {specialties.map((spec) => (
