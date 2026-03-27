@@ -1,10 +1,6 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
 
-type Params = {
-  params: { id: string };
-};
-
 type Doctor = {
   _id: string;
   name: string;
@@ -21,10 +17,17 @@ type Slot = {
   endAt: string;
 };
 
-export default async function DoctorDetailsPage({ params }: Params) {
-  const { id } = params;
+export default async function DoctorDetailsPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
 
-  const doctorRes = await fetch(`http://localhost:8000/api/doctors/${id}`, {
+  const API = process.env.NEXT_PUBLIC_API_URL;
+
+  // Fetch doctor
+  const doctorRes = await fetch(`${API}/doctors/${id}`, {
     cache: "no-store",
   });
 
@@ -41,19 +44,20 @@ export default async function DoctorDetailsPage({ params }: Params) {
 
   const doctor: Doctor = await doctorRes.json();
 
-  // Fetch available slots for this doctor
-  const slotsRes = await fetch(
-    `http://localhost:8000/api/availability/${id}`,
-    { cache: "no-store" }
-  );
+  // Fetch slots
+  const slotsRes = await fetch(`${API}/availability/${id}`, {
+    cache: "no-store",
+  });
 
   const slots: Slot[] = slotsRes.ok ? await slotsRes.json() : [];
 
+  // Server action for booking
   async function bookSlot(slotId: string) {
-    "use server"; // server action in Next 13+
+    "use server";
+
     const token = cookies().get("token")?.value;
 
-    await fetch(`http://localhost:8000/api/appointments`, {
+    await fetch(`${API}/appointments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -72,7 +76,7 @@ export default async function DoctorDetailsPage({ params }: Params) {
         ← Back to Doctors
       </Link>
 
-      <div className="bg-white shadow-lg  rounded-lg p-6">
+      <div className="bg-white shadow-lg rounded-lg p-6">
         <h1 className="text-3xl text-yellow-900 font-bold">{doctor.name}</h1>
         <p className="text-yellow-900">{doctor.specialty}</p>
         <p className="text-yellow-900">{doctor.experience} years experience</p>
@@ -83,7 +87,9 @@ export default async function DoctorDetailsPage({ params }: Params) {
           </p>
         )}
 
-        {doctor.bio && <p className="mt-4 text-gray-800">{doctor.bio}</p>}
+        {doctor.bio && (
+          <p className="mt-4 text-gray-800">{doctor.bio}</p>
+        )}
 
         {doctor.contact && (
           <p className="mt-4">
@@ -93,7 +99,9 @@ export default async function DoctorDetailsPage({ params }: Params) {
       </div>
 
       <div className="mt-6 bg-white shadow-lg rounded-lg p-6">
-        <h2 className="text-xl text-yellow-900 font-bold mb-4">Available Slots</h2>
+        <h2 className="text-xl text-yellow-900 font-bold mb-4">
+          Available Slots
+        </h2>
 
         {slots.length === 0 ? (
           <p className="text-yellow-700">No available slots</p>
@@ -105,9 +113,10 @@ export default async function DoctorDetailsPage({ params }: Params) {
                 className="flex justify-between items-center border p-3 rounded-lg"
               >
                 <span>
-                  {new Date(slot.startAt).toLocaleString()} -{" "}
+                  {new Date(slot.startAt).toLocaleString()} –{" "}
                   {new Date(slot.endAt).toLocaleString()}
                 </span>
+
                 <form action={async () => bookSlot(slot._id)}>
                   <button
                     type="submit"
@@ -124,5 +133,3 @@ export default async function DoctorDetailsPage({ params }: Params) {
     </div>
   );
 }
-
-
