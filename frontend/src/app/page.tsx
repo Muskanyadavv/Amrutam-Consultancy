@@ -6,13 +6,13 @@ import Image from "next/image";
 
 const slides = [
   {
-    image: "/4723839.webp",
-    title: "Welcome to Amrutam",
-    subtitle: " Your trusted Ayurvedic doctor consultation platform. 🌿Ayurveda for Modern Living Bridging ancient wisdom with today’s lifestyle for complete mind-body wellness.ltation platform."
+    image: "/WhatsApp Image 2025-11-05 at 13.28.14_4f2bdf93.jpg",
+    title: "Welcome to Nayan",
+    subtitle: " Kajal that heal, not hurt - choose Ayurvedic Kajal. Completely focus on eye health with the touch of Ayurveda"
   },
   {
     image: "/img2.jpg",
-    title: "Expert Ayurvedic Doctors",
+    title: "Expert Ayurvedic Doctor",
     subtitle: "🌸 Get guidance from certified specialists for your health, Holistic Wellness, Naturally Discover authentic, ethically sourced solutions for a healthier, happier you."
   },
   {

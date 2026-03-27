@@ -12,7 +12,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
           <AuthProvider>
        <Navbar/>
-     
         {children}
         <ToastContainer position="top-right" autoClose={3000}/>
         </AuthProvider>

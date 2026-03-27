@@ -31,9 +31,9 @@ export default function Footer() {
         <div>
           <h2 className="text-lg text-[#FFFF00]  font-semibold mb-3">Contact Us</h2>
           <ul className="space-y-2 text-sm text-gray-300">
-            <li>Email: <a href="mailto:support@amrutam.com" className="hover:underline">support@amrutam.com</a></li>
+            <li>Email: <a href="mailto:support@amrutam.com" className="hover:underline">guptasweta463@gmail.com</a></li>
             <li>Phone: +91-9876543210</li>
-            <li>Location: Bhopal, India</li>
+            <li>Location: Jaunpur  UP </li>
           </ul>
         </div>
       </div>

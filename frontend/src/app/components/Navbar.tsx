@@ -27,16 +27,16 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex items-center">
             <Link href="/" className="text-2xl font-bold text-[#FFFF00]">
-              Amrutam
+              Ayurvidya Ayurveda
             </Link>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8 items-center text-[#FFFF00]">
             <Link href="/" className="hover:text-white">Home</Link>
-            <Link href="/doctors" className="hover:text-white">Doctors</Link>
             <Link href="/appointments" className="hover:text-white">Appointments</Link>
             <Link href="/about" className="hover:text-white">About</Link>
+            <Link href="/nayan" className="hover:text-white">Product</Link>
           </div>
 
           {/* Right side - Login or Profile */}

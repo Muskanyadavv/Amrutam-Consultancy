@@ -145,20 +145,20 @@ export default function RegisterPage() {
           transition={{ duration: 0.5 }}
           className="bg-white rounded-lg shadow-lg p-6 w-full max-w-sm flex flex-col"
         >
-          <h2 className="text-xl font-bold text-yellow-900 mb-4 text-center">
-            Create an Amrutam Account
+          <h2 className="text-xl font-bold text-amber-700 mb-4 text-center">
+            Create an Account
           </h2>
 
           {/* Role Selection */}
           <div className="mb-4">
-            <label className="block text-yellow-900 font-medium mb-2">
+            <label className="block text-black font-medium mb-2">
               Sign up as:
             </label>
-            <div className="flex text-yellow-900 gap-6">
+            <div className="flex text-black gap-6">
               {["patient", "doctor"].map((role) => (
                 <label
                   key={role}
-                  className="flex items-center text-yellow-900 gap-2"
+                  className="flex items-center text-black gap-2"
                 >
                   <input
                     type="radio"
@@ -184,7 +184,7 @@ export default function RegisterPage() {
               label: "Confirm Password *",
             },
           ].map(({ name, type, label }) => (
-            <div className="mb-3 text-yellow-900 " key={name}>
+            <div className="mb-3 text-black " key={name}>
               <label className="block text-sm font-medium mb-1">{label}</label>
               <input
                 name={name}
@@ -258,7 +258,7 @@ export default function RegisterPage() {
             disabled={loading}
             whileHover={{ scale: loading ? 1 : 1.05 }}
             whileTap={{ scale: loading ? 1 : 0.95 }}
-            className="mt-4 w-full bg-green-500 text-white font-semibold py-2 rounded-lg shadow-md hover:bg-green-600 disabled:opacity-50"
+            className="mt-4 w-full bg-amber-700 text-white font-semibold py-2 rounded-lg shadow-md hover:bg-amber-800 disabled:opacity-50"
           >
             {loading ? "Signing Up..." : "Sign Up"}
           </motion.button>
@@ -266,7 +266,7 @@ export default function RegisterPage() {
           {message && (
             <p
               className={`mt-3 text-center text-sm ${
-                messageType === "success" ? "text-green-600" : "text-red-600"
+                messageType === "success" ? "text-amber-700" : "text-red-600"
               }`}
             >
               {message}
@@ -275,7 +275,7 @@ export default function RegisterPage() {
 
           <p className="mt-3 text-center text-gray-600 text-sm">
             Already have an account?{" "}
-            <Link href="/login" className="text-yellow-900 hover:underline">
+            <Link href="/login" className="text-amber-700 hover:underline">
               Login
             </Link>
           </p>

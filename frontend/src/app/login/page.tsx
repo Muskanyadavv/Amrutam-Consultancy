@@ -63,16 +63,16 @@ export default function LoginPage() {
         transition={{ duration: 0.6 }}
         className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full"
       >
-        <h2 className="text-3xl font-bold text-green-700 mb-6 text-center">
-          Login to Amrutam
+        <h2 className="text-3xl font-bold text-amber-700 mb-6 text-center">
+          Login to Ayurvidya
         </h2>
 
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
         {/* Role Selection */}
         <div className="mb-4">
-          <label className="block font-medium mb-2">Login as:</label>
-          <div className="flex gap-6">
+          <label className="block text-black font-medium mb-2">Login as:</label>
+          <div className=" text-black flex gap-6">
             {["patient", "doctor"].map((r) => (
               <label key={r} className="flex items-center gap-2">
                 <input
@@ -117,7 +117,7 @@ export default function LoginPage() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={handleLogin}
-          className="w-full bg-green-500 text-white font-semibold py-2 rounded-lg shadow-md hover:bg-green-600 transition duration-300"
+          className="w-full bg-amber-700 text-white font-semibold py-2 rounded-lg shadow-md hover:bg-amber-600 transition duration-300"
         >
           Login
         </motion.button>
@@ -125,7 +125,7 @@ export default function LoginPage() {
         {/* Extra Links */}
         <p className="mt-4 text-center text-gray-600">
           Don't have an account?{" "}
-          <Link href="/register" className="text-green-600 hover:underline">
+          <Link href="/register" className="text-amber-700 hover:underline">
             Sign Up
           </Link>
         </p>
